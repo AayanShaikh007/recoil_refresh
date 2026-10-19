@@ -50,6 +50,7 @@ object BlePermissions {
     }
 
     /** Modified for Recoil Refresh: Android allows a connected-device service without notification permission. */
+    @SuppressLint("InlinedApi") // Constant string comparison is safe on older Android versions.
     fun requiredForConnect(sdkInt: Int): List<String> =
         forConnect(sdkInt).filterNot { it == Manifest.permission.POST_NOTIFICATIONS }
 
