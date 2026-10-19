@@ -11,3 +11,12 @@
 /captures
 .externalNativeBuild
 app/debug
+
+# Local SDKs, downloaded originals, signing material and generated investigation files
+/tools/
+/original/
+/work/
+/artifacts/
+**/build/
+*.keystore
+*.jks
