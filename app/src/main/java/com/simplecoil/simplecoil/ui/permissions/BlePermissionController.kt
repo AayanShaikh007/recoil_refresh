@@ -48,7 +48,8 @@ class BlePermissionController(
     private val onQrScanAllowed: () -> Unit,
 ) {
     private val connectPermissions = activity.registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
-        when (outcome(results)) {
+        // Recoil Refresh: denying optional notifications must not prevent blaster pairing.
+        when (BlePermissions.outcome(results, required(Flow.CONNECT)) { ActivityCompat.shouldShowRequestPermissionRationale(activity, it) }) {
             BlePermissions.Outcome.GRANTED -> vm.onLocationPermissionsGranted()
             BlePermissions.Outcome.DENIED ->
                 Toast.makeText(activity, activity.getString(R.string.error_location_permission_required), Toast.LENGTH_SHORT).show()
@@ -100,7 +101,7 @@ class BlePermissionController(
             return
         }
 
-        if (missing(Flow.CONNECT).isNotEmpty()) {
+        if (missing(Flow.CONNECT).any { it in required(Flow.CONNECT) }) {
             request(Flow.CONNECT, rationaleShown = false)
             return
         }
@@ -158,7 +159,8 @@ class BlePermissionController(
 
     /** The permissions [flow] can't go ahead without. */
     private fun required(flow: Flow) = when (flow) {
-        Flow.CONNECT, Flow.QR_SCAN -> permissions(flow)
+        Flow.CONNECT -> BlePermissions.requiredForConnect(Build.VERSION.SDK_INT)
+        Flow.QR_SCAN -> permissions(flow)
         Flow.HOST_SERVER, Flow.JOIN_NETWORK -> BlePermissions.requiredForNetwork(Build.VERSION.SDK_INT)
     }
 

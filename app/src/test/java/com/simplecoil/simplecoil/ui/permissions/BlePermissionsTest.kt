@@ -31,6 +31,29 @@ class BlePermissionsTest {
     private val localNetwork = "android.permission.ACCESS_LOCAL_NETWORK"
 
     @Test
+    fun connect_notificationDenialDoesNotBlockModernPhones() {
+        for (api in 33..37) {
+            val required = BlePermissions.requiredForConnect(api)
+            assertEquals(listOf(scan, connect, fineLocation), required)
+            assertEquals(Outcome.GRANTED, BlePermissions.outcome(
+                mapOf(scan to true, connect to true, fineLocation to true, notifications to false),
+                required,
+            ) { false })
+            // Re-entering connect after a denied notification must not request it forever.
+            assertEquals(emptyList<String>(), BlePermissions.missing(required) { it != notifications })
+        }
+    }
+
+    @Test
+    fun connect_requiredBluetoothDenialStillBlocks() {
+        assertEquals(Outcome.PERMANENTLY_DENIED, BlePermissions.outcome(
+            mapOf(scan to false, connect to true, fineLocation to true, notifications to true),
+            BlePermissions.requiredForConnect(35),
+        ) { false })
+        assertEquals(listOf(fineLocation), BlePermissions.requiredForConnect(30))
+    }
+
+    @Test
     fun connect_perApiLevel() {
         assertEquals(emptyList<String>(), BlePermissions.forConnect(21))
         assertEquals(emptyList<String>(), BlePermissions.forConnect(22))

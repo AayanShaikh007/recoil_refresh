@@ -36,7 +36,7 @@ object BlePermissions {
 
     /**
      * The permissions "Connect blaster" asks for on [sdkInt], in request order. Unchanged from the
-     * activity: all of them must be granted before scanning.
+     * activity. Notifications are requested alongside access but do not gate scanning.
      */
     @SuppressLint("InlinedApi") // each permission is only listed on the versions that have it
     fun forConnect(sdkInt: Int): List<String> = buildList {
@@ -48,6 +48,10 @@ object BlePermissions {
         if (sdkInt >= Build.VERSION_CODES.M) add(Manifest.permission.ACCESS_FINE_LOCATION)
         if (sdkInt >= Build.VERSION_CODES.TIRAMISU) add(Manifest.permission.POST_NOTIFICATIONS)
     }
+
+    /** Modified for Recoil Refresh: Android allows a connected-device service without notification permission. */
+    fun requiredForConnect(sdkInt: Int): List<String> =
+        forConnect(sdkInt).filterNot { it == Manifest.permission.POST_NOTIFICATIONS }
 
     /** Android 17, where local network access became a runtime permission. */
     const val SDK_LOCAL_NETWORK = 37

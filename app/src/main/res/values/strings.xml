@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">SimpleCoil</string>
-    <string name="app_name_with_version">SimpleCoil v%1$s</string>
-    <string name="info_sheet_title">About SimpleCoil</string>
+    <string name="app_name">Recoil Refresh</string>
+    <string name="app_name_with_version">Recoil Refresh v%1$s</string>
+    <string name="info_sheet_title">About Recoil Refresh</string>
     <string name="player_sheet_title">Players - tap a player for player settings</string>
 
     <string name="reconnect_weapon_button">Reconnect Same Blaster Only</string>

@@ -9,15 +9,15 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.simplecoil.simplecoil"
+        applicationId = "io.github.aayanshaikh007.recoilrefresh"
         minSdk {
             version = release(23)
         }
         targetSdk {
             version = release(37)
         }
-        versionCode = 14
-        versionName = "2.0"
+        versionCode = 1
+        versionName = "0.1.0-dev"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
