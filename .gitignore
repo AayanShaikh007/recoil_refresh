@@ -17,6 +17,7 @@ app/debug
 /original/
 /work/
 /artifacts/
+/.kotlin/
 **/build/
 *.keystore
 *.jks
