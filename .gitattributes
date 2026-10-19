@@ -1,0 +1,5 @@
+* text=auto
+gradlew text eol=lf
+*.sh text eol=lf
+# Wire fixtures compare protocol bytes; Windows checkout must not add carriage returns.
+app/src/test/resources/wire/** text eol=lf
