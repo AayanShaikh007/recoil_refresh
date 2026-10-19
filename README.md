@@ -19,6 +19,8 @@ SimpleCoil connects directly to a Recoil blaster over Bluetooth LE. Its multipla
 
 Local toolchains belong in `tools/`, original downloads in `original/`, temporary analysis in `work/`, and test APKs in `artifacts/`. These directories are ignored. Do not commit signing keys, device logs containing personal information, or proprietary APK contents.
 
+Run `scripts/Build.ps1` to test, lint and build. The APK is copied to `artifacts/recoil-refresh-debug.apk`. Run `scripts/Device-Check.ps1 -InstallRefresh` with an authorized USB-connected phone to record its compatibility details and install the test build. See [the compatibility report and physical test plan](docs/COMPATIBILITY.md).
+
 ## Attribution
 
 SimpleCoil is licensed under Apache-2.0; see [LICENSE](LICENSE). Upstream copyright and license notices are retained. Recoil Refresh is an independent compatibility effort, not an official Skyrocket release.
