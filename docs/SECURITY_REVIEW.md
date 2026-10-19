@@ -23,9 +23,9 @@ This review does not replace the APK, and no application security fixes have bee
 
 ### 1. High privacy concern: automatic server discovery plus server-controlled GPS sharing
 
-After blaster communication begins, `ui/game/GameViewModel.kt:937` automatically searches Wi-Fi for a game server. `network/discovery/DiscoveryClient.kt:77` accepts matching UDP advertisements without authenticating their sender. `UDPListenerService.kt:91` selects the discovered server without a separate trust confirmation.
+After blaster communication begins, `ui/game/GameViewModel.kt:937` automatically searches Wi-Fi for a game server. `network/discovery/DiscoveryClient.kt:74` accepts matching UDP advertisements without authenticating their sender. `UDPListenerService.kt:97` selects the discovered server without a separate trust confirmation.
 
-`network/client/ClientMessageHandler.kt:224` enables GPS whenever the server includes a GPS mode in game information. `MapFragment.java:148` responds by starting location tracking; its location callback sends coordinates through `NetworkSessionGateway.sendLocation` to the game server. If precise location permission was already granted for pairing/map use, there is no separate local approval for sharing with this server.
+`network/client/ClientMessageHandler.kt:224` enables GPS whenever the server includes a GPS mode in game information. `MapFragment.java:151` responds by starting location tracking; its location callback sends coordinates through `NetworkSessionGateway.sendLocation` to the game server. If precise location permission was already granted for pairing/map use, there is no separate local approval for sharing with this server.
 
 **Impact:** a rogue server reachable on the same network can potentially receive the phone's location after automatic joining. Android's location permission still applies; the app cannot bypass a permission denial. General location permission is not the same as informed consent to this specific server.
 
@@ -45,7 +45,7 @@ After blaster communication begins, `ui/game/GameViewModel.kt:937` automatically
 
 ### 3. Medium privacy concern: teammate-only GPS filtering happens after disclosure
 
-`network/server/SnapshotBuilder.kt:132` builds one GPS list containing all teams. `network/server/GameServer.kt:661` broadcasts it to every connection. `hardware/location/MapLocationManager.java:232` filters which markers the normal UI displays.
+`network/server/SnapshotBuilder.kt:135` builds one GPS list containing all teams. `network/server/GameServer.kt:661` broadcasts it to every connection. `hardware/location/MapLocationManager.java:226` filters which markers the normal UI displays.
 
 **Impact:** choosing teammate-only GPS hides opponent markers in the standard screen, but it does not keep opponents' coordinates out of a modified client's network data. Because `sendToAll` iterates all accepted connections, a peer need not complete a normal hello before potentially receiving broadcasts while it remains connected.
 
