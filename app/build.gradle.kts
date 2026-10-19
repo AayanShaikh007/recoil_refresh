@@ -1,3 +1,5 @@
+// Modified in 2026 by Aayan Shaikh for Recoil Refresh: app identity and version.
+// SPDX-License-Identifier: Apache-2.0
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -16,8 +18,8 @@ android {
         targetSdk {
             version = release(37)
         }
-        versionCode = 1
-        versionName = "0.1.0-dev"
+        versionCode = 2
+        versionName = "0.1.1-dev"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

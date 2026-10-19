@@ -2,6 +2,8 @@
 
 Restore playable Recoil laser tag on current Android phones, initially the Nothing Phone (3a) and Samsung Galaxy S23.
 
+**Based on [SimpleCoil](https://github.com/Dees-Troy/SimpleCoil), by Ethan Yonker, Brennan Yonker and its contributors.** Recoil Refresh is an independent fork maintained by Aayan Shaikh. Credit for the upstream implementation remains with its authors.
+
 ## Status
 
 Work in progress. Installation, Bluetooth and multiplayer must be verified on physical hardware before either phone is declared supported.
@@ -23,4 +25,6 @@ Run `scripts/Build.ps1` to test, lint and build. The APK is copied to `artifacts
 
 ## Attribution
 
-SimpleCoil is licensed under Apache-2.0; see [LICENSE](LICENSE). Upstream copyright and license notices are retained. Recoil Refresh is an independent compatibility effort, not an official Skyrocket release.
+The source code is licensed under **Apache License 2.0**; see the complete [LICENSE](LICENSE), [NOTICE](NOTICE), and [third-party credits](THIRD_PARTY_NOTICES.md). Upstream copyright notices and history are retained. Modified upstream files identify the Recoil Refresh changes; Aayan Shaikh claims credit only for those changes and additions.
+
+GameBurp sound effects retain their separate EULA. The Apache license does not relicense the proprietary original Recoil app, hub firmware, trademarks, or separately licensed assets. Recoil Refresh is independent and is not endorsed by Skyrocket, IllFonic, or the SimpleCoil authors. Credits, NOTICE and the full Apache license are also included inside the app.

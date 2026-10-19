@@ -1,0 +1,31 @@
+Recoil Refresh
+Copyright 2026 Aayan Shaikh (Recoil Refresh modifications and additions)
+
+This project is an independent fork of SimpleCoil:
+https://github.com/Dees-Troy/SimpleCoil
+
+SimpleCoil
+Copyright 2018-2026 Ethan Yonker and Brennan Yonker
+Additional upstream contributors retain the copyrights stated in their files.
+The original source history and existing copyright/license notices are retained.
+Initial upstream revision: b39ab85b287b983a406c595efcbf8b5701579a5b
+
+SimpleCoil source and Recoil Refresh source changes are provided under the
+Apache License, Version 2.0. See LICENSE for the complete terms.
+
+Recoil Refresh changes include Android compatibility and permission handling,
+separate app identity, build/verification scripts, CI, and project documentation.
+These changes do not transfer ownership of the upstream work to this fork.
+
+Third-party components retain their own notices and license terms. In particular,
+GameBurp sound effects are covered by the GameBurp Sound Effects EULA, not by
+this project's Apache license. That EULA is retained in
+app/src/main/res/raw/gameburp_sfx_license.pdf and packaged in the app.
+See THIRD_PARTY_NOTICES.md and the in-app About section for further credits.
+
+RECOIL and related product names belong to their respective owners and are used
+to describe hardware compatibility. This project is not affiliated with or
+endorsed by Skyrocket, IllFonic, or the SimpleCoil authors. It does not include
+or claim ownership of the proprietary original Recoil app or hub firmware.
+
+This NOTICE is informational and does not alter the terms of any license.

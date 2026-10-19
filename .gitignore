@@ -1,3 +1,4 @@
+# Modified in 2026 by Aayan Shaikh for Recoil Refresh: exclude local tools and private build files.
 *.iml
 .gradle
 /local.properties

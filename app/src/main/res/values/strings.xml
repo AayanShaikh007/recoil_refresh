@@ -1,3 +1,4 @@
+<!-- Modified in 2026 by Aayan Shaikh for Recoil Refresh: app name and permission explanation. -->
 <resources>
     <string name="app_name">Recoil Refresh</string>
     <string name="app_name_with_version">Recoil Refresh v%1$s</string>
