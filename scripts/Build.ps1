@@ -18,6 +18,18 @@ try {
     if ($LASTEXITCODE -ne 0) { throw "Gradle failed ($LASTEXITCODE)." }
     New-Item -ItemType Directory -Force artifacts | Out-Null
     Copy-Item app/build/outputs/apk/debug/app-debug.apk artifacts/recoil-refresh-debug.apk
+    $signer = Get-ChildItem "$env:ANDROID_HOME/build-tools/*/apksigner.bat" | Sort-Object FullName -Descending | Select-Object -First 1
+    if (-not $signer) { throw 'Android build-tools apksigner was not found.' }
+    & $signer.FullName verify artifacts/recoil-refresh-debug.apk *> artifacts/signature-verification.txt
+    if ($LASTEXITCODE -ne 0) { throw 'APK signature verification failed.' }
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $archive = [System.IO.Compression.ZipFile]::OpenRead("$projectRoot/artifacts/recoil-refresh-debug.apk")
+    try {
+        $nativeLibraries = @($archive.Entries | Where-Object { $_.FullName.EndsWith('.so') })
+        if ($nativeLibraries.Count -ne 0) {
+            throw 'Native libraries appeared in the APK. Review 64-bit and 16 KB compatibility before distributing.'
+        }
+    } finally { $archive.Dispose() }
     Get-FileHash artifacts/recoil-refresh-debug.apk -Algorithm SHA256
     Write-Host 'Built artifacts/recoil-refresh-debug.apk. Physical phone/blaster testing is still required.'
 } finally { Pop-Location }
